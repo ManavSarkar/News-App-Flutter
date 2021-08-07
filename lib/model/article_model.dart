@@ -3,7 +3,7 @@ import 'package:news_app_flutter/model/source_model.dart';
 enum NewsCategory { Headlines, Technology }
 
 class Article {
-  // final Source source;
+  final Source? source;
   final String? author;
   final String? title;
   final String? description;
@@ -12,7 +12,7 @@ class Article {
   final String? publisher;
   final String? content;
   Article({
-    // required this.source,
+    required this.source,
     required this.author,
     required this.title,
     required this.description,
@@ -24,13 +24,13 @@ class Article {
 
   Article.fromJson(Map<String, dynamic> json)
       : this(
-          // source: json['source'],
+          source: Source.fromJson(json['source']),
           author: json["author"],
-          title: json['title'] as String,
+          title: json['title'],
           description: json['description'],
-          url: json['url'] as String,
+          url: json['url'],
           image: json['urlToImage'],
-          publisher: json['publishedAt'] as String,
+          publisher: json['publishedAt'],
           content: json['content'],
         );
 }

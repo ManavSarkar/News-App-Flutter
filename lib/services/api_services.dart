@@ -18,6 +18,9 @@ class ApiService {
       List<dynamic> body = json['articles'];
       List<Article> articles =
           body.map((dynamic e) => Article.fromJson(e)).toList();
+
+      articles.removeWhere((element) => element.image == null);
+
       return articles;
     } else {
       print('Error in getting the respective file\nplease try again later');
