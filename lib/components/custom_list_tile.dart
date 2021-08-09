@@ -18,41 +18,42 @@ Widget customArticleTile(BuildContext context, Article article) {
       },
       child: Column(
         children: [
-          Container(
+          Image.network(
+            article.image!,
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.width * .75,
-            decoration:
-                BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-            child: Image.network(
-              article.image!,
-              fit: BoxFit.fill,
-              frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                if (wasSynchronouslyLoaded) {
-                  return child;
-                }
-                return AnimatedOpacity(
-                  child: child,
-                  opacity: frame == null ? 0 : 1,
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.easeOut,
-                );
-              },
-            ),
+            height: MediaQuery.of(context).size.width * (9 / 16),
+            fit: BoxFit.fill,
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              if (wasSynchronouslyLoaded) {
+                return child;
+              }
+              return AnimatedOpacity(
+                child: child,
+                opacity: frame == null ? 0 : 1,
+                duration: const Duration(seconds: 1),
+                curve: Curves.easeOut,
+              );
+            },
+            errorBuilder: (context, error, stackTrace) {
+              print(error.toString());
+              return CircularProgressIndicator();
+            },
           ),
           Text(
             article.title!,
             style: TextStyle(
-              fontSize: 24.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.w700,
             ),
           ),
           Text(
             article.description ?? "",
             style: TextStyle(
-              fontSize: 18.0,
+              fontSize: 16.0,
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w400,
             ),
+            softWrap: true,
           )
         ],
       ),

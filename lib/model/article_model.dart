@@ -1,6 +1,14 @@
 import 'package:news_app_flutter/model/source_model.dart';
 
-enum NewsCategory { Headlines, Technology }
+enum NewsCategory {
+  headlines,
+  business,
+  entertainment,
+  health,
+  science,
+  sports,
+  technology
+}
 
 class Article {
   final Source? source;
